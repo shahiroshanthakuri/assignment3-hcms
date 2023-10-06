@@ -2,7 +2,9 @@
 package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class Database {
     
@@ -34,6 +36,7 @@ public class Database {
         }
        createAllTables();
        setAutoIncrement();
+       insertAdmin();
     }
     
     // secure a database connnection
@@ -81,12 +84,45 @@ public class Database {
             Connection c = getConnection();
             Statement s = c.createStatement();
             s.addBatch(Queries.USER_TABLE_AUTO_INCREMENT);
+            s.addBatch(Queries.PATIENT_TABLE_AUTO_INCREMENT);
+            s.addBatch(Queries.MEDICAL_STAFF_TABLE_AUTO_INCREMENT);
+            s.addBatch(Queries.BILLING_TABLE_AUTO_INCREMENT);
+            s.addBatch(Queries.APPOINTMENT_TABLE_AUTO_INCREMENT);
             
+            // execute all queries
             s.executeBatch();
             
         } catch (Exception e) {
             System.out.println("Exception in auto increment");
-//            e.printStackTrace();
+            e.printStackTrace();
+        }
+    }
+    
+    public void insertAdmin()
+    {
+        try {
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.INSERT_INTO_USER);
+            LocalDate date = LocalDate.now();
+            
+            User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "admin", "admin");
+            
+            ps.setString(1,admin.getFirstName());
+            ps.setString(2,admin.getLastName());
+            ps.setString(3,admin.getGender());
+            ps.setDate(4,admin.getDateOfBirth());
+            ps.setString(5,admin.getEmail());
+            ps.setString(6,admin.getPassword());
+            ps.setString(7,admin.getRole());
+            
+            ps.executeUpdate();
+            ps.close();
+            
+                     
+            
+        } catch (Exception e) {
+            System.out.println("Exception in admin");
+            e.printStackTrace();
         }
     }
     

@@ -20,7 +20,10 @@ public class Queries {
                                         "    Password VARCHAR(255) NOT NULL,\n" +
                                         "    Role VARCHAR(20) NOT NULL\n" +
                                         ");";
-    public static String USER_TABLE_AUTO_INCREMENT = "ALTER TABLE User AUTO_INCREMENT = 1000;";
+    public static String USER_TABLE_AUTO_INCREMENT = "ALTER TABLE User AUTO_INCREMENT = 1000001;";
+    
+    public static String INSERT_INTO_USER = "INSERT INTO User (FirstName, LastName, Gender, DateOfBirth, EmailAddress, Password, Role)\n" +
+                                            "VALUES (?, ?, ?, ?, ?, ?, ?);";
     
             public static String PATIENT_TABLE = "CREATE TABLE Patient (\n" +
                 "    patientid INT AUTO_INCREMENT PRIMARY KEY,\n" +
@@ -33,7 +36,7 @@ public class Queries {
                 "    MedicalHistory TEXT,\n" +
                 "    Allergies TEXT\n" +  // Remove the extra comma here
                 ");";
-
+public static String PATIENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Patient AUTO_INCREMENT = 2000001;";
 
     
     public static String MEDICAL_STAFF_TABLE = "CREATE TABLE MedicalStaff (\n" +
@@ -47,6 +50,7 @@ public class Queries {
                                                 "    Specialty VARCHAR(50),\n" +
                                                 "    WorkingSchedule TEXT\n" +
                                                 ");";
+    public static String MEDICAL_STAFF_TABLE_AUTO_INCREMENT = "ALTER TABLE MedicalStaff AUTO_INCREMENT = 3000001;";
     
     public static String APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
                                             "    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,\n" +
@@ -59,6 +63,8 @@ public class Queries {
                                             "    FOREIGN KEY (PatientID) REFERENCES Patient(patientid),\n" +
                                             "    FOREIGN KEY (HealthcareProviderID) REFERENCES MedicalStaff(StaffID)\n" +
                                             ");";
+    public static String APPOINTMENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Appointment AUTO_INCREMENT = 4000001;";
+
     
     public static String BILLING_TABLE = "CREATE TABLE BillingInvoice (\n" +
                                         "    InvoiceID INT AUTO_INCREMENT PRIMARY KEY,\n" +
@@ -70,4 +76,6 @@ public class Queries {
                                         "    PaymentMethod VARCHAR(50),\n" +
                                         "    FOREIGN KEY (PatientID) REFERENCES Patient(PatientID)\n" +
                                         ");";
+    public static String BILLING_TABLE_AUTO_INCREMENT = "ALTER TABLE BillingInvoice AUTO_INCREMENT = 5000001;";
+
 }

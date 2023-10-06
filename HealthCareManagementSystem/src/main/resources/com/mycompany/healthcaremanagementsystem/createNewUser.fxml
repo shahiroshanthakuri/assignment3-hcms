@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.healthcaremanagementsystem.createNewUserController">
+   <children>
+      <Label layoutX="251.0" layoutY="23.0" text="Create New User" />
+      <Label layoutX="159.0" layoutY="69.0" text="First Name:" />
+      <Label layoutX="159.0" layoutY="103.0" text="Last Name:" />
+      <Label layoutX="176.0" layoutY="142.0" text="Gender:" />
+      <Label layoutX="147.0" layoutY="182.0" text="Date Of Birth:" />
+      <Label layoutX="145.0" layoutY="222.0" text="Email Address:" />
+      <Label layoutX="162.0" layoutY="263.0" text="Password:" />
+      <Label layoutX="189.0" layoutY="298.0" text="Role:" />
+      <MenuButton fx:id="roleMenu" layoutX="246.0" layoutY="294.0" mnemonicParsing="false" onAction="#roleMenuBtn" prefHeight="26.0" prefWidth="150.0" text="Select Role">
+        <items>
+          <MenuItem mnemonicParsing="false" text="admin" />
+          <MenuItem mnemonicParsing="false" text="medical staff" />
+            <MenuItem mnemonicParsing="false" text="patient" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="genderMenu" layoutX="246.0" layoutY="138.0" mnemonicParsing="false" onAction="#genderMenuBtn" prefHeight="26.0" prefWidth="150.0" text="Select Gender">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Male" />
+          <MenuItem mnemonicParsing="false" text="Female" />
+            <MenuItem mnemonicParsing="false" text="Other" />
+        </items>
+      </MenuButton>
+      <TextField layoutX="246.0" layoutY="65.0" />
+      <TextField layoutX="246.0" layoutY="99.0" />
+      <TextField layoutX="246.0" layoutY="218.0" />
+      <TextField layoutX="246.0" layoutY="259.0" />
+      <DatePicker layoutX="247.0" layoutY="178.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button layoutX="247.0" layoutY="344.0" mnemonicParsing="false" onAction="#createUserBtn" prefHeight="26.0" prefWidth="150.0" text="Create User" />
+   </children>
+</AnchorPane>
