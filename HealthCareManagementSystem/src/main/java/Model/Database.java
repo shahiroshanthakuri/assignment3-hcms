@@ -33,8 +33,9 @@ public class Database {
             e.printStackTrace();
         }
        createAllTables();
+       setAutoIncrement();
     }
-
+    
     // secure a database connnection
     private Connection getConnection()
     {
@@ -71,6 +72,21 @@ public class Database {
         } catch (Exception e) {
             System.out.println("Exception in create tables");
             e.printStackTrace();
+        }
+    }
+    
+    public void setAutoIncrement()
+    {
+        try {
+            Connection c = getConnection();
+            Statement s = c.createStatement();
+            s.addBatch(Queries.USER_TABLE_AUTO_INCREMENT);
+            
+            s.executeBatch();
+            
+        } catch (Exception e) {
+            System.out.println("Exception in auto increment");
+//            e.printStackTrace();
         }
     }
     

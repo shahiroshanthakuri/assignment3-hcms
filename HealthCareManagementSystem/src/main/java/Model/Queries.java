@@ -11,7 +11,7 @@ public class Queries {
     public static String CREATE_DATABASE = "CREATE DATABASE IF NOT EXISTS healthlink;";
     
     public static String USER_TABLE = "CREATE TABLE User (\n" +
-                                        "    UserID INT PRIMARY KEY,\n" +
+                                        "    UserID INT AUTO_INCREMENT PRIMARY KEY,\n" +
                                         "    FirstName VARCHAR(50) NOT NULL,\n" +
                                         "    LastName VARCHAR(50) NOT NULL,\n" +
                                         "    Gender VARCHAR(20),\n" +
@@ -20,9 +20,10 @@ public class Queries {
                                         "    Password VARCHAR(255) NOT NULL,\n" +
                                         "    Role VARCHAR(20) NOT NULL\n" +
                                         ");";
+    public static String USER_TABLE_AUTO_INCREMENT = "ALTER TABLE User AUTO_INCREMENT = 1000;";
     
             public static String PATIENT_TABLE = "CREATE TABLE Patient (\n" +
-                "    patientid INT PRIMARY KEY,\n" +
+                "    patientid INT AUTO_INCREMENT PRIMARY KEY,\n" +
                 "    FirstName VARCHAR(50) NOT NULL,\n" +
                 "    LastName VARCHAR(50) NOT NULL,\n" +
                 "    Gender VARCHAR(20),\n" +
@@ -36,7 +37,7 @@ public class Queries {
 
     
     public static String MEDICAL_STAFF_TABLE = "CREATE TABLE MedicalStaff (\n" +
-                                                "    StaffID INT PRIMARY KEY,\n" +
+                                                "    StaffID INT AUTO_INCREMENT PRIMARY KEY,\n" +
                                                 "    FirstName VARCHAR(50) NOT NULL,\n" +
                                                 "    LastName VARCHAR(50) NOT NULL,\n" +
                                                 "    Gender VARCHAR(20),\n" +
@@ -48,7 +49,7 @@ public class Queries {
                                                 ");";
     
     public static String APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
-                                            "    AppointmentID INT PRIMARY KEY,\n" +
+                                            "    AppointmentID INT AUTO_INCREMENT PRIMARY KEY,\n" +
                                             "    PatientID INT,\n" +
                                             "    HealthcareProviderID INT,\n" +
                                             "    AppointmentDate DATE,\n" +
@@ -60,7 +61,7 @@ public class Queries {
                                             ");";
     
     public static String BILLING_TABLE = "CREATE TABLE BillingInvoice (\n" +
-                                        "    InvoiceID INT PRIMARY KEY,\n" +
+                                        "    InvoiceID INT AUTO_INCREMENT PRIMARY KEY,\n" +
                                         "    PatientID INT,\n" +
                                         "    InvoiceDate DATE,\n" +
                                         "    DueDate DATE,\n" +
