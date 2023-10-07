@@ -11,9 +11,9 @@
    <children>
       <Label layoutX="263.0" layoutY="72.0" text="Login Page" />
       <Label layoutX="211.0" layoutY="31.0" text="Health Care Management System" />
-      <TextField fx:id="emailField" layoutX="218.0" layoutY="113.0" promptText="Email Address" />
+      <TextField fx:id="emailField" layoutX="218.0" layoutY="113.0" promptText="User ID" />
       <PasswordField fx:id="passwordField" layoutX="218.0" layoutY="153.0" promptText="Password" />
-      <Label layoutX="119.0" layoutY="117.0" text="Email Address" />
+      <Label layoutX="119.0" layoutY="117.0" text="UserID" />
       <Label layoutX="119.0" layoutY="157.0" text="Password" />
       <Button layoutX="217.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginEvent" prefHeight="26.0" prefWidth="150.0" text="Login" />
       <Text fx:id="error" fill="RED" layoutX="217.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="363.19992675781236" />

@@ -1,8 +1,10 @@
 
 package Model;
+import com.mycompany.healthcaremanagementsystem.App;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
 
@@ -12,6 +14,7 @@ public class Database {
     private String username;
     private String password;
     private Connection c;
+    private App app;
     
     // create the database healthlink
     public Database(String username, String password)
@@ -34,9 +37,13 @@ public class Database {
          catch (Exception e) {
             e.printStackTrace();
         }
+       app = new App();
        createAllTables();
        setAutoIncrement();
-       insertAdmin();
+       LocalDate date = LocalDate.now();
+            
+       User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "admin", "admin");
+       insertAdmin(admin);
     }
     
     // secure a database connnection
@@ -98,14 +105,13 @@ public class Database {
         }
     }
     
-    public void insertAdmin()
+    public User insertAdmin(User admin)
     {
         try {
+            
             Connection c = getConnection();
             PreparedStatement ps = c.prepareStatement(Queries.INSERT_INTO_USER);
-            LocalDate date = LocalDate.now();
             
-            User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "admin", "admin");
             
             ps.setString(1,admin.getFirstName());
             ps.setString(2,admin.getLastName());
@@ -115,7 +121,18 @@ public class Database {
             ps.setString(6,admin.getPassword());
             ps.setString(7,admin.getRole());
             
-            ps.executeUpdate();
+            int ra = ps.executeUpdate();
+            Statement s = c.createStatement();
+
+            if (ra > 0) {
+                ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+                if (rs.next()) {
+                    long id = rs.getInt(1);
+                    admin.setId(id);
+                }
+            }
+            // setting the current user
+            app.setCurrentUser(admin);
             ps.close();
             
                      
@@ -124,6 +141,35 @@ public class Database {
             System.out.println("Exception in admin");
             e.printStackTrace();
         }
+        return admin;
     }
+    
+    
+    public User selectUserByID(long id)
+    {
+        User u = null;
+        try {
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SELECT_USER_BY_ID);
+            ps.setLong(1, id);
+            
+            ResultSet rs= ps.executeQuery();
+            if(rs.next())
+            {
+                u = new User(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8));
+            }
+            else{
+                return u;
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Exception in getting user by id");
+            e.printStackTrace();
+        }
+            
+        return u;
+    }
+ 
+   
     
 }

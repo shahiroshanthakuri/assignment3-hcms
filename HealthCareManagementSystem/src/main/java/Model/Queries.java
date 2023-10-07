@@ -22,6 +22,11 @@ public class Queries {
                                         ");";
     public static String USER_TABLE_AUTO_INCREMENT = "ALTER TABLE User AUTO_INCREMENT = 1000001;";
     
+    public static String SELECT_USER_BY_ID = "SELECT * FROM User WHERE UserID = ?";
+    public static String SELECT_USER_BY_EMAIL = "SELECT * FROM User WHERE EmailAddress = ?";
+
+    
+    
     public static String INSERT_INTO_USER = "INSERT INTO User (FirstName, LastName, Gender, DateOfBirth, EmailAddress, Password, Role)\n" +
                                             "VALUES (?, ?, ?, ?, ?, ?, ?);";
     
@@ -36,7 +41,7 @@ public class Queries {
                 "    MedicalHistory TEXT,\n" +
                 "    Allergies TEXT\n" +  // Remove the extra comma here
                 ");";
-public static String PATIENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Patient AUTO_INCREMENT = 2000001;";
+    public static String PATIENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Patient AUTO_INCREMENT = 2000001;";
 
     
     public static String MEDICAL_STAFF_TABLE = "CREATE TABLE MedicalStaff (\n" +

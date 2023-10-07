@@ -1,8 +1,12 @@
 
 package com.mycompany.healthcaremanagementsystem;
 
+import Model.User;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -34,12 +38,12 @@ public class loginController implements Initializable {
     
     @FXML
     private void loginEvent(ActionEvent event) {
-        String email = emailField.getText();
+        String userID = emailField.getText();
         String password = passwordField.getText();
         
-        if(email.isBlank())
+        if(userID.isBlank())
         {
-            showError(true, "Email Address is required!");
+            showError(true, "UserID is required!");
         }
         else if(password.isBlank())
         {
@@ -47,7 +51,16 @@ public class loginController implements Initializable {
         }
         else{
             showError(false, "");
-            
+            long uID = Long.parseLong(userID);
+            User u = App.getDb().selectUserByID(uID);
+            if(u.getRole().equalsIgnoreCase("admin"))
+            {
+                try {
+                    App.setRoot("adminHome");
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
         }
         
     }

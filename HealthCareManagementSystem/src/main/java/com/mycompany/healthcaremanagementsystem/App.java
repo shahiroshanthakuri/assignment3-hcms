@@ -1,6 +1,7 @@
 package com.mycompany.healthcaremanagementsystem;
 
 import Model.Database;
+import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +16,8 @@ import java.io.IOException;
 public class App extends Application {
 
     private static Scene scene;
-    private Database db;
+    private static Database db;
+    private User currentUser;
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -38,9 +40,19 @@ public class App extends Application {
         launch();
     }
 
-    public Database getDb() {
+    public static Database getDb() {
         return db;
     }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
+    }
+    
+    
     
     
 
