@@ -40,9 +40,13 @@ public class Database {
        createAllTables();
        setAutoIncrement();
        LocalDate date = LocalDate.now();
-            
+        
        User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "a", "Admin");
+       User medicalStaff = new User(-1,"Medical", "Staff", "male", java.sql.Date.valueOf(date), "medicalStaff@mail.com", "a", "Medical Staff");
+       Patient p = new Patient(-1, "Patient", "Patient", "Male", java.sql.Date.valueOf(date), "123 main Street", "123 049 0599", "9867 87362 4", "None");
        insertAdmin(admin);
+       insertAdmin(medicalStaff);
+        addNewPatient(p);
     }
     
     // secure a database connnection
@@ -254,6 +258,31 @@ public class Database {
         }
         return p;
         
+    }
+    
+    public Patient selectPatientByID(long id)
+    {
+        Patient p = null;
+        try {
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SEARCH_PATIENT_BY_ID);
+            ps.setLong(1, id);
+            
+            ResultSet rs= ps.executeQuery();
+            if(rs.next())
+            {
+                p = new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+            else{
+                return p;
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Exception in getting Patient by id");
+            e.printStackTrace();
+        }
+            
+        return p;
     }
     
     

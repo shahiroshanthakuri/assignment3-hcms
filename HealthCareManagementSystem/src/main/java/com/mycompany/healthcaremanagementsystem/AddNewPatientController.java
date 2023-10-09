@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
@@ -99,10 +101,28 @@ public class AddNewPatientController implements Initializable {
             showError(true, "Medical History is required");
         }
         else{
+            showError(false, "");
              dateOfBirth = java.sql.Date.valueOf(dateOfBirthField.getValue());
              
              // create new patient
              Patient p = new Patient(-1, firstName, lastName, gender, dateOfBirth, address, contactNumber, medicareCard, medicalhistory);
+             p = App.getDb().addNewPatient(p);
+             
+              // show the success message
+            
+            // Display a success alert
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Health Care Management System");
+            alert.setHeaderText("Success");
+            alert.setContentText("A New Patient has been Added\n\nPatient-ID: "+p.getPatientId());
+            alert.getButtonTypes().setAll(ButtonType.OK);
+            alert.showAndWait().ifPresent(response -> {
+                if (response == ButtonType.OK) {
+
+                }
+            });
+            
+            clearFields();
         }
     }
 
@@ -121,5 +141,18 @@ public class AddNewPatientController implements Initializable {
         error.setText(msg);
         error.setVisible(e);
     }
+        
+    public void clearFields()
+    {
+        firstnameField.setText("");
+        lastnameField.setText("");
+        genderMenu.setText("Select Gender");
+        dateOfBirthField.setValue(null);
+        addressField.setText("");
+        contactNumberField.setText("");
+        medicareCardField.setText("");
+        medicalHistoryField.setText("");
+    }
+
 
 }

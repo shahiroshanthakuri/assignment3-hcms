@@ -8,7 +8,7 @@
    <children>
       <Label layoutX="248.0" layoutY="22.0" text="Medical Staff Home" />
       <Button layoutX="250.0" layoutY="92.0" mnemonicParsing="false" onAction="#addPatientEvent" text="Add New Patient" />
-      <Button layoutX="248.0" layoutY="144.0" mnemonicParsing="false" onAction="#updatePatientEvent" text="Update Patirnt information" />
+      <Button layoutX="248.0" layoutY="144.0" mnemonicParsing="false" onAction="#updatePatientEvent" text="Update Patient information" />
       <Button layoutX="472.0" layoutY="359.0" mnemonicParsing="false" onAction="#logoutEvent" prefHeight="26.0" prefWidth="108.0" text="Log Out" />
       <Button layoutX="248.0" layoutY="192.0" mnemonicParsing="false" onAction="#scheduleAppointmentEvent" text="Schedule Appointment" />
       <Button layoutX="248.0" layoutY="233.0" mnemonicParsing="false" onAction="#viewBillsEvent" text="View Bills" />

@@ -1,6 +1,7 @@
 package com.mycompany.healthcaremanagementsystem;
 
 import Model.Database;
+import Model.Patient;
 import Model.User;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +21,7 @@ public class App extends Application {
     private static Database db;
     private static User currentUser;
     private static User searchedUser;
+    private static Patient searchedPatient;
     public static boolean isDatabaseExist = false;
 
     @Override
@@ -78,11 +80,14 @@ public class App extends Application {
     public static void setSearchedUser(User searchedUser) {
         App.searchedUser = searchedUser;
     }
-    
-    
-    
-    
-    
-    
 
+    public static Patient getSearchedPatient() {
+        return searchedPatient;
+    }
+
+    public static void setSearchedPatient(Patient searchedPatient) {
+        App.searchedPatient = searchedPatient;
+    }
+ 
+    
 }
