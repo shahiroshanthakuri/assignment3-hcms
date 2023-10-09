@@ -39,7 +39,7 @@ public class App extends Application {
 
             // Database setup (if not already created)
             if (!isDatabaseExist) {
-                db = new Database("root", "15896");
+                db = new Database("root", "P@55W0Rd1995");
                 isDatabaseExist = true;
             }
 
