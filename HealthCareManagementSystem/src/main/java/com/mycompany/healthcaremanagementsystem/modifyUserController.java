@@ -50,16 +50,16 @@ public class modifyUserController implements Initializable {
 
     @FXML
     private void deleteUserEvent(ActionEvent event) {
-        App.getDb().deleteUserById(App.getSearchedUser().getId());
+        
         System.out.println("Current User: "+App.getCurrentUser().getFirstName());
-        System.out.println("Current User: "+App.getSearchedUser().getFirstName());
+        System.out.println("Searched User: "+App.getSearchedUser().getFirstName());
 
         if(App.getCurrentUser().getId() == App.getSearchedUser().getId())
         {
-             displayMessage("Success", "The User Deleted Successfully.\n\nBut... The you were logged in as the deleted user so you have been logged out\n\nPlease log in again.");
-            App.switchScene("loginPage.fxml");
+             displayMessage("Failed", "You are currently logged in. \n\nCan not delete your account.");
         }
         else{
+            App.getDb().deleteUserById(App.getSearchedUser().getId());
             displayMessage("Success", "The User Deleted Successfully.\n\nRedirecting to Search Page.");
             App.switchScene("searchUser.fxml");
         }

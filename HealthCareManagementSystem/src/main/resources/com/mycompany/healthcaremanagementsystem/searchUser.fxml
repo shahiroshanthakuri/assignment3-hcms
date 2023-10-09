@@ -10,12 +10,13 @@
    <children>
       <Text fx:id="error" fill="RED" layoutX="217.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="363.19992675781236" />
       <Label layoutX="265.0" layoutY="21.0" text="Search User To Modify" />
-      <Button layoutX="472.0" layoutY="359.0" mnemonicParsing="false" onAction="#logoutEvent" prefHeight="26.0" prefWidth="108.0" text="Log Out" />
+      <Button layoutX="494.0" layoutY="359.0" mnemonicParsing="false" onAction="#logoutEvent" prefHeight="26.0" prefWidth="86.0" text="Log Out" />
       <Label layoutX="164.0" layoutY="133.0" text="User ID:" />
       <TextField fx:id="searchField" layoutX="226.0" layoutY="129.0" />
       <Button layoutX="225.0" layoutY="165.0" mnemonicParsing="false" onAction="#searchBtnEvent" prefHeight="26.0" prefWidth="150.0" text="Search" />
       <Text fx:id="error" fill="RED" layoutX="164.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="414.13671875" />
       <Text fx:id="foundUserText" layoutX="35.0" layoutY="263.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="339.73675537109375" />
       <Button fx:id="updateBtn" layoutX="399.0" layoutY="246.0" mnemonicParsing="false" onAction="#updateUserEvent" text="Update" visible="false" />
+      <Button layoutX="410.0" layoutY="359.0" mnemonicParsing="false" onAction="#homeBtn" prefHeight="26.0" prefWidth="55.0" text="Home" />
    </children>
 </AnchorPane>

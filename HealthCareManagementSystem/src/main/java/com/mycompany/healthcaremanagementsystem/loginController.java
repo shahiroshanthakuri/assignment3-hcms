@@ -73,6 +73,7 @@ public class loginController implements Initializable {
                         {
                            
                                 App.switchScene("adminHome.fxml");
+                                App.setCurrentUser(u);
                         
                         }
 

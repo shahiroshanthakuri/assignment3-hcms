@@ -38,11 +38,9 @@ public class SearchUserController implements Initializable {
     
     @FXML
     private void logoutEvent(ActionEvent event) {
-        try {
-            App.switchScene("adminHome.fxml");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
+            App.switchScene("loginPage.fxml");
+ 
     }
 
     @FXML
@@ -84,6 +82,11 @@ public class SearchUserController implements Initializable {
     {
         error.setText(msg);
         error.setVisible(e);
+    }
+
+    @FXML
+    private void homeBtn(ActionEvent event) {
+        App.switchScene("adminHome.fxml");
     }
 
 }

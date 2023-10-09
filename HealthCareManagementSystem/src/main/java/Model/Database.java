@@ -128,7 +128,7 @@ public class Database {
                 }
             }
             // setting the current user
-            App.setCurrentUser(admin);
+            
             ps.close();
             
                      
