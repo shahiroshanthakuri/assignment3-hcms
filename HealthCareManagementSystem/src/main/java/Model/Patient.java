@@ -1,6 +1,8 @@
 
 package Model;
 
+import java.sql.Date;
+
 /**
  *
  * @author sahil
@@ -10,16 +12,18 @@ public class Patient {
     private String firstname;
     private String lastname;
     private String gender;
+    private java.sql.Date dateOfBirth;
     private String address;
     private String contactNum;
     private String medicareNumber;
     private String medicalHistory;
 
-    public Patient(long patientId, String firstname, String lastname, String gender, String address, String contactNum, String medicareNumber, String medicalHistory) {
+    public Patient(long patientId, String firstname, String lastname, String gender, Date dateOfBirth, String address, String contactNum, String medicareNumber, String medicalHistory) {
         this.patientId = patientId;
         this.firstname = firstname;
         this.lastname = lastname;
         this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
         this.address = address;
         this.contactNum = contactNum;
         this.medicareNumber = medicareNumber;
@@ -58,6 +62,14 @@ public class Patient {
         this.gender = gender;
     }
 
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -90,6 +102,7 @@ public class Patient {
         this.medicalHistory = medicalHistory;
     }
 
+    
     
     
     
