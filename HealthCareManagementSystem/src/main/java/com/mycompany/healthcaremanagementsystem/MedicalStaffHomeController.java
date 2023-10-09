@@ -44,6 +44,7 @@ public class MedicalStaffHomeController implements Initializable {
 
     @FXML
     private void viewBillsEvent(ActionEvent event) {
+        App.switchScene("searchPatientBill.fxml");
     }
 
     @FXML
