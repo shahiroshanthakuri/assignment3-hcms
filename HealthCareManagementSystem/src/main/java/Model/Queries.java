@@ -31,16 +31,22 @@ public class Queries {
                                             "VALUES (?, ?, ?, ?, ?, ?, ?);";
     
             public static String PATIENT_TABLE = "CREATE TABLE Patient (\n" +
-                                                "    patient_id INT AUTO_INCREMENT PRIMARY KEY,\n" +
-                                                "    firstname VARCHAR(50) NOT NULL,\n" +
-                                                "    lastname VARCHAR(50) NOT NULL,\n" +
-                                                "    address VARCHAR(100),\n" +
-                                                "    contact_number VARCHAR(15),\n" +
-                                                "    medicare_num VARCHAR(20),\n" +
-                                                "    medical_history TEXT\n" +
-                                                ");";
+                                                    "    patient_id INT AUTO_INCREMENT PRIMARY KEY,\n" +
+                                                    "    firstname VARCHAR(255) NOT NULL,\n" +
+                                                    "    lastname VARCHAR(255) NOT NULL,\n" +
+                                                    "    gender VARCHAR(10),\n" +
+                                                    "    dateOfBirth DATE,\n" +
+                                                    "    address VARCHAR(255),\n" +
+                                                    "    contactNum VARCHAR(20),\n" +
+                                                    "    medicareNumber VARCHAR(20),\n" +
+                                                    "    medicalHistory TEXT\n" +
+                                                    ");";
+            public static String INSERT_INTO_PATIENT = "INSERT INTO Patient (firstname, lastname, gender, dateOfBirth, address, contactNum, medicareNumber, medicalHistory)\n"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static String PATIENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Patient AUTO_INCREMENT = 1001;";
-
+    public static String SEARCH_PATIENT_BY_ID = "SELECT * From Patient where patient_id = ?";
+    public static String UPDATE_PATIENT_BY_ID = "UPDATE patient SET firstname = ?, lastname = ?, gender = ?, dateOfBirth = ?, address = ?, contactNum = ?, medicareNumber = ?, medicalHistory = ? WHERE patient_id = ?";
+    public static String DELETE_PATIENT_BY_ID = "DELETE FROM Patient WHERE patient_id = ?";
     
     
     public static String APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +

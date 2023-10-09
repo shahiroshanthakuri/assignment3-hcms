@@ -35,9 +35,9 @@
       <Button layoutX="247.0" layoutY="476.0" mnemonicParsing="false" onAction="#addPatientBtn" prefHeight="26.0" prefWidth="150.0" text="Add Patient" />
       <Label layoutX="95.0" layoutY="309.0" text="Medicare Card Number:" />
       <TextField fx:id="medicareCardField" layoutX="246.0" layoutY="305.0" promptText="4536 76873 1" />
-      <Text fx:id="error" fill="RED" layoutX="247.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="328.5367431640625" />
-      <Button layoutX="411.0" layoutY="541.0" mnemonicParsing="false" onAction="#homeBtn" text="Home" />
-      <Button layoutX="479.0" layoutY="541.0" mnemonicParsing="false" onAction="#logoutBtn" text="Log Out" />
+      <Text fx:id="error" fill="RED" layoutX="115.0" layoutY="533.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="450.13677978515625" />
+      <Button layoutX="411.0" layoutY="560.0" mnemonicParsing="false" onAction="#homeBtn" text="Home" />
+      <Button layoutX="479.0" layoutY="560.0" mnemonicParsing="false" onAction="#logoutBtn" text="Log Out" />
       <TextArea fx:id="medicalHistoryField" layoutX="245.0" layoutY="343.0" prefHeight="121.0" prefWidth="150.0" promptText="No previous medical history" wrapText="true" />
    </children>
 </AnchorPane>

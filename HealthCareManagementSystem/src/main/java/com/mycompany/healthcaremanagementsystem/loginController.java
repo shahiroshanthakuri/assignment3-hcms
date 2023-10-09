@@ -76,6 +76,11 @@ public class loginController implements Initializable {
                                 App.setCurrentUser(u);
                         
                         }
+                        else if(u.getRole().equalsIgnoreCase("medical staff"))
+                        {
+                            App.switchScene("medicalStaffHome.fxml");
+                            App.setCurrentUser(u);
+                        }
 
                     }
                     else{

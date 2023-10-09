@@ -18,7 +18,7 @@ public class Patient {
     private String medicareNumber;
     private String medicalHistory;
 
-    public Patient(long patientId, String firstname, String lastname, String gender, Date dateOfBirth, String address, String contactNum, String medicareNumber, String medicalHistory) {
+    public Patient(long patientId, String firstname, String lastname, String gender, java.sql.Date dateOfBirth, String address, String contactNum, String medicareNumber, String medicalHistory) {
         this.patientId = patientId;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -62,11 +62,11 @@ public class Patient {
         this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
+    public java.sql.Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(java.sql.Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -214,6 +214,49 @@ public class Database {
     }
     
     
+    public Patient addNewPatient(Patient p)
+    {
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.INSERT_INTO_PATIENT);
+            
+            
+            ps.setString(1,p.getFirstname());
+            ps.setString(2,p.getLastname());
+            ps.setString(3,p.getGender());
+            ps.setDate(4,p.getDateOfBirth());
+            ps.setString(5,p.getAddress());
+            ps.setString(6,p.getContactNum());
+            ps.setString(7,p.getMedicareNumber());
+            ps.setString(8,p.getMedicalHistory());
+
+            
+            int ra = ps.executeUpdate();
+            Statement s = c.createStatement();
+
+            if (ra > 0) {
+                ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+                if (rs.next()) {
+                    long id = rs.getInt(1);
+                    p.setPatientId(id);
+                }
+            }
+            // setting the current user
+            
+            ps.close();
+            
+                     
+            
+        } catch (Exception e) {
+            System.out.println("Exception in add new patient");
+            e.printStackTrace();
+        }
+        return p;
+        
+    }
+    
+    
     public void modifyUserSetFields(modifyUserController muc, User u)
     {
         muc.getFirstnameField().setText(u.getFirstName());

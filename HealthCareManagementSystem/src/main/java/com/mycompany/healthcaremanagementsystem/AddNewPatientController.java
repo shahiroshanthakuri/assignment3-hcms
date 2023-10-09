@@ -1,6 +1,7 @@
 
 package com.mycompany.healthcaremanagementsystem;
 
+import Model.Patient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
@@ -48,12 +50,60 @@ public class AddNewPatientController implements Initializable {
     
     @FXML
     private void genderMenuEvent(ActionEvent event) {
-        
+        MenuItem selectedItem = (MenuItem) event.getSource();
+        String selected = selectedItem.getText();
+        genderMenu.setText(selected);
     }
 
     @FXML
     private void addPatientBtn(ActionEvent event) {
-        
+            String firstName = firstnameField.getText();
+            String lastName = lastnameField.getText();
+            String gender = genderMenu.getText();
+            java.sql.Date dateOfBirth= null;
+            String address = addressField.getText();
+            String contactNumber = contactNumberField.getText();
+            String medicareCard = medicareCardField.getText();
+            String medicalhistory = medicalHistoryField.getText();
+            
+        if(firstName.isBlank())
+        {
+            showError(true, "Firstname is required!");
+        }
+        else if(lastName.isBlank())
+        {
+            showError(true, "LastName is required!");
+        }
+        else if(gender.isBlank() || gender.compareTo("Select Gender") == 0)
+        {
+            showError(true, "Please select a gender");
+        }
+        else if(dateOfBirthField.getValue() == null)
+        {
+            showError(true, "Please select date of birth");
+        }
+        else if(address.isBlank())
+        {
+            showError(true, "Address is required");
+        }
+        else if(contactNumber.isBlank())
+        {
+            showError(true, "Contactnumber is required");
+        }
+        else if(medicareCard.isBlank())
+        {
+            showError(true, "Medicare Card Number is required");
+        }
+        else if(medicalhistory.isBlank())
+        {
+            showError(true, "Medical History is required");
+        }
+        else{
+             dateOfBirth = java.sql.Date.valueOf(dateOfBirthField.getValue());
+             
+             // create new patient
+             Patient p = new Patient(-1, firstName, lastName, gender, dateOfBirth, address, contactNumber, medicareCard, medicalhistory);
+        }
     }
 
     @FXML
@@ -64,6 +114,12 @@ public class AddNewPatientController implements Initializable {
     @FXML
     private void logoutBtn(ActionEvent event) {
         App.switchScene("loginPage.fxml");
+    }
+    
+        public void showError(boolean e,String msg)
+    {
+        error.setText(msg);
+        error.setVisible(e);
     }
 
 }

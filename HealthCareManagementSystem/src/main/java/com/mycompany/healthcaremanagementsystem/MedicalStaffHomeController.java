@@ -27,6 +27,7 @@ public class MedicalStaffHomeController implements Initializable {
     
     @FXML
     private void addPatientEvent(ActionEvent event) {
+        App.switchScene("addNewPatient.fxml");
     }
 
     @FXML

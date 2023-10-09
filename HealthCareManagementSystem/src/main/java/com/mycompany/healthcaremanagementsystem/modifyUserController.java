@@ -115,7 +115,12 @@ public class modifyUserController implements Initializable {
         else if(role.isBlank())
         {
             showError(true, "Role can not be blank");
-        }else{
+        }
+        else if(password.compareTo(confPass) != 0)
+        {
+            showError(true, "Password and Confirm Password must be same");
+        }
+        else{
             boolean dobCorrect = false;
             java.sql.Date sqlDateOfBirth = null;
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
