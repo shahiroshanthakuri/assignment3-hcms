@@ -73,7 +73,7 @@ public class SearchPatientController implements Initializable {
 
     @FXML
     private void updateUserEvent(ActionEvent event) {
-        
+        App.switchScene("updatePatient.fxml");
     }
 
     @FXML

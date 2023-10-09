@@ -1,6 +1,7 @@
 
 package Model;
 import com.mycompany.healthcaremanagementsystem.App;
+import com.mycompany.healthcaremanagementsystem.UpdatePatientController;
 import com.mycompany.healthcaremanagementsystem.modifyUserController;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -286,6 +287,37 @@ public class Database {
     }
     
     
+   public Patient updatePatientByID(Patient p)
+    {
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.UPDATE_PATIENT_BY_ID);
+            
+            
+            ps.setString(1,p.getFirstname());
+            ps.setString(2,p.getLastname());
+            ps.setString(3,p.getGender());
+            ps.setDate(4,p.getDateOfBirth());
+            ps.setString(5,p.getAddress());
+            ps.setString(6,p.getContactNum());
+            ps.setString(7,p.getMedicareNumber());
+            ps.setString(8, p.getMedicalHistory());
+            ps.setLong(9, p.getPatientId());
+            
+            ps.executeUpdate();
+            ps.close();
+            
+                     
+            
+        } catch (Exception e) {
+            System.out.println("Exception in update Patient");
+            e.printStackTrace();
+        }
+        return p;
+    }
+    
+    
     public void modifyUserSetFields(modifyUserController muc, User u)
     {
         muc.getFirstnameField().setText(u.getFirstName());
@@ -296,6 +328,18 @@ public class Database {
         muc.getPasswordField().setText(u.getPassword());
         muc.getConfirmPassField().setText(u.getPassword());
         muc.getRoleField().setText(u.getRole());
+    }
+    
+    public void updatePatientSetFields(UpdatePatientController upc, Patient p)
+    {
+        upc.getFirstnameField().setText(p.getFirstname());
+        upc.getLastnameField().setText(p.getLastname());
+        upc.getGenderMenu().setText(p.getGender());
+        upc.getDateOfBirthField().setValue(p.getDateOfBirth().toLocalDate());
+        upc.getAddressField().setText(p.getAddress());
+        upc.getContactNumberField().setText(p.getContactNum());
+        upc.getMedicareCardField().setText(p.getMedicareNumber());
+        upc.getMedicalHistoryField().setText(p.getMedicalHistory());
     }
  
    

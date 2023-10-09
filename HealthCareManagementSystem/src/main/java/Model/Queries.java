@@ -45,7 +45,7 @@ public class Queries {
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     public static String PATIENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Patient AUTO_INCREMENT = 1001;";
     public static String SEARCH_PATIENT_BY_ID = "SELECT * From Patient where patient_id = ?";
-    public static String UPDATE_PATIENT_BY_ID = "UPDATE patient SET firstname = ?, lastname = ?, gender = ?, dateOfBirth = ?, address = ?, contactNum = ?, medicareNumber = ?, medicalHistory = ? WHERE patient_id = ?";
+    public static String UPDATE_PATIENT_BY_ID = "UPDATE Patient SET firstname = ?, lastname = ?, gender = ?, dateOfBirth = ?, address = ?, contactNum = ?, medicareNumber = ?, medicalHistory = ? WHERE patient_id = ?";
     public static String DELETE_PATIENT_BY_ID = "DELETE FROM Patient WHERE patient_id = ?";
     
     

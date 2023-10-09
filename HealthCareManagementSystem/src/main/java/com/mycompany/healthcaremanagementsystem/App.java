@@ -48,6 +48,11 @@ public class App extends Application {
                 modifyUserController muc = (modifyUserController) loader.getController();
                 getDb().modifyUserSetFields(muc, getSearchedUser());
             }
+            if(fxmlFileName.equalsIgnoreCase("updatePatient.fxml"))
+            {
+                UpdatePatientController upc = (UpdatePatientController) loader.getController();
+                getDb().updatePatientSetFields(upc, getSearchedPatient());
+            }
             
             // Set the current scene to the new scene
             currentScene = new Scene(root);

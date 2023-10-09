@@ -9,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
-
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -21,7 +20,7 @@ import javafx.scene.text.Text;
  *
  * @author sahil
  */
-public class AddNewPatientController implements Initializable {
+public class UpdatePatientController implements Initializable {
 
 
     @FXML
@@ -58,7 +57,7 @@ public class AddNewPatientController implements Initializable {
     }
 
     @FXML
-    private void addPatientBtn(ActionEvent event) {
+    private void updatePatientBtn(ActionEvent event) {
             String firstName = firstnameField.getText();
             String lastName = lastnameField.getText();
             String gender = genderMenu.getText();
@@ -101,12 +100,12 @@ public class AddNewPatientController implements Initializable {
             showError(true, "Medical History is required");
         }
         else{
-            showError(false, "");
+             showError(false, "");
              dateOfBirth = java.sql.Date.valueOf(dateOfBirthField.getValue());
              
              // create new patient
-             Patient p = new Patient(-1, firstName, lastName, gender, dateOfBirth, address, contactNumber, medicareCard, medicalhistory);
-             p = App.getDb().addNewPatient(p);
+             Patient p = new Patient(App.getSearchedPatient().getPatientId(), firstName, lastName, gender, dateOfBirth, address, contactNumber, medicareCard, medicalhistory);
+             App.getDb().updatePatientByID(p);
              
               // show the success message
             
@@ -114,15 +113,14 @@ public class AddNewPatientController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Health Care Management System");
             alert.setHeaderText("Success");
-            alert.setContentText("A New Patient has been Added\n\nPatient-ID: "+p.getPatientId());
+            alert.setContentText("A New Patient has been Updated");
             alert.getButtonTypes().setAll(ButtonType.OK);
             alert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
 
                 }
             });
-            
-            clearFields();
+
         }
     }
 
@@ -135,24 +133,47 @@ public class AddNewPatientController implements Initializable {
     private void logoutBtn(ActionEvent event) {
         App.switchScene("loginPage.fxml");
     }
+
+    public MenuButton getGenderMenu() {
+        return genderMenu;
+    }
+
+    public TextField getFirstnameField() {
+        return firstnameField;
+    }
+
+    public TextField getLastnameField() {
+        return lastnameField;
+    }
+
+    public TextField getAddressField() {
+        return addressField;
+    }
+
+    public TextField getContactNumberField() {
+        return contactNumberField;
+    }
+
+    public DatePicker getDateOfBirthField() {
+        return dateOfBirthField;
+    }
+
+    public TextField getMedicareCardField() {
+        return medicareCardField;
+    }
+
+    public Text getError() {
+        return error;
+    }
+
+    public TextArea getMedicalHistoryField() {
+        return medicalHistoryField;
+    }
     
     public void showError(boolean e,String msg)
     {
         error.setText(msg);
         error.setVisible(e);
     }
-        
-    public void clearFields()
-    {
-        firstnameField.setText("");
-        lastnameField.setText("");
-        genderMenu.setText("Select Gender");
-        dateOfBirthField.setValue(null);
-        addressField.setText("");
-        contactNumberField.setText("");
-        medicareCardField.setText("");
-        medicalHistoryField.setText("");
-    }
-
 
 }
