@@ -9,15 +9,17 @@ public class Patient {
     private long patientId;
     private String firstname;
     private String lastname;
+    private String gender;
     private String address;
     private String contactNum;
     private String medicareNumber;
     private String medicalHistory;
 
-    public Patient(long patientId, String firstname, String lastname, String address, String contactNum, String medicareNumber, String medicalHistory) {
+    public Patient(long patientId, String firstname, String lastname, String gender, String address, String contactNum, String medicareNumber, String medicalHistory) {
         this.patientId = patientId;
         this.firstname = firstname;
         this.lastname = lastname;
+        this.gender = gender;
         this.address = address;
         this.contactNum = contactNum;
         this.medicareNumber = medicareNumber;
@@ -46,6 +48,14 @@ public class Patient {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getAddress() {
@@ -79,6 +89,8 @@ public class Patient {
     public void setMedicalHistory(String medicalHistory) {
         this.medicalHistory = medicalHistory;
     }
+
+    
     
     
     

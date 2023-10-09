@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="518.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.healthcaremanagementsystem.AddNewPatientController">
+   <children>
+      <Label layoutX="251.0" layoutY="23.0" text="Add New Patient" />
+      <Label layoutX="159.0" layoutY="69.0" text="First Name:" />
+      <Label layoutX="159.0" layoutY="103.0" text="Last Name:" />
+      <Label layoutX="176.0" layoutY="142.0" text="Gender:" />
+      <Label layoutX="147.0" layoutY="182.0" text="Date Of Birth:" />
+      <Label layoutX="145.0" layoutY="222.0" text="Email Address:" />
+      <Label layoutX="162.0" layoutY="263.0" text="Password:" />
+      <Label layoutX="189.0" layoutY="351.0" text="Role:" />
+      <MenuButton fx:id="roleMenu" layoutX="247.0" layoutY="347.0" mnemonicParsing="false" onAction="#roleMenuEvent" prefHeight="26.0" prefWidth="150.0" text="Select Role">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#roleMenuEvent" text="Admin" />
+          <MenuItem mnemonicParsing="false" onAction="#roleMenuEvent" text="Medical Staff" />
+        </items>
+      </MenuButton>
+      <MenuButton fx:id="genderMenu" layoutX="246.0" layoutY="138.0" mnemonicParsing="false" onAction="#genderMenuEvent" prefHeight="26.0" prefWidth="150.0" text="Select Gender">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#genderMenuEvent" text="Male" />
+          <MenuItem mnemonicParsing="false" onAction="#genderMenuEvent" text="Female" />
+            <MenuItem mnemonicParsing="false" onAction="#genderMenuEvent" text="Other" />
+        </items>
+      </MenuButton>
+      <TextField fx:id="firstnameField" layoutX="246.0" layoutY="65.0" />
+      <TextField fx:id="lastnameField" layoutX="246.0" layoutY="99.0" />
+      <TextField fx:id="emailField" layoutX="246.0" layoutY="218.0" />
+      <TextField fx:id="passwordField" layoutX="246.0" layoutY="259.0" />
+      <DatePicker fx:id="dateOfBirthField" layoutX="247.0" layoutY="178.0" prefHeight="26.0" prefWidth="150.0" />
+      <Button layoutX="247.0" layoutY="385.0" mnemonicParsing="false" onAction="#createUserBtn" prefHeight="26.0" prefWidth="150.0" text="Create User" />
+      <Label layoutX="118.0" layoutY="309.0" text="Confirm Password:" />
+      <TextField fx:id="confirmPassField" layoutX="246.0" layoutY="305.0" />
+      <Text fx:id="error" fill="RED" layoutX="247.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="328.5367431640625" />
+      <Button layoutX="405.0" layoutY="479.0" mnemonicParsing="false" onAction="#homeBtn" text="Home" />
+      <Button layoutX="473.0" layoutY="479.0" mnemonicParsing="false" onAction="#logoutBtn" text="Log Out" />
+   </children>
+</AnchorPane>
