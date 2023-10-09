@@ -58,6 +58,10 @@ public class App extends Application {
                 ViewBillController vbc = (ViewBillController) loader.getController();
                 getDb().setBillView(vbc, getSearchedPatient());
             }
+            if(fxmlFileName.equalsIgnoreCase("viewAnalytics.fxml")){
+                ViewAnalyticsController vac = (ViewAnalyticsController) loader.getController();
+                getDb().setAnalyticsView(vac);
+            }
             
             // Set the current scene to the new scene
             currentScene = new Scene(root);

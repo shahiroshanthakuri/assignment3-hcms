@@ -78,7 +78,7 @@ public class SearchPatientBillController implements Initializable {
     @FXML
     private void viewBillEvent(ActionEvent event) {
         
-        List<Invoice> li = App.getDb().getAllInvoices(App.getSearchedPatient());
+        List<Invoice> li = App.getDb().getAllInvoicesByID(App.getSearchedPatient());
         if(li.size() == 0)
         {
             showError(true, "The Selected Patient has no bills to show");

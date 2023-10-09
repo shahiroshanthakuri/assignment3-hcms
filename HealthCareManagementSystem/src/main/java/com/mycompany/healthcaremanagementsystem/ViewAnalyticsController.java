@@ -28,10 +28,18 @@ public class ViewAnalyticsController implements Initializable {
     
     @FXML
     private void homeBtnEvent(ActionEvent event) {
+        App.switchScene("medicalStaffHome.fxml");
     }
 
     @FXML
     private void logOutEvent(ActionEvent event) {
+        App.switchScene("loginPage.fxml");
     }
+
+    public TextArea getAnalyticsArea() {
+        return analyticsArea;
+    }
+    
+    
 
 }

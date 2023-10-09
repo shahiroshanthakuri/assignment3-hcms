@@ -47,6 +47,7 @@ public class Queries {
     public static String SEARCH_PATIENT_BY_ID = "SELECT * From Patient where patient_id = ?";
     public static String UPDATE_PATIENT_BY_ID = "UPDATE Patient SET firstname = ?, lastname = ?, gender = ?, dateOfBirth = ?, address = ?, contactNum = ?, medicareNumber = ?, medicalHistory = ? WHERE patient_id = ?";
     public static String DELETE_PATIENT_BY_ID = "DELETE FROM Patient WHERE patient_id = ?";
+    public static String SELECT_ALL_PATIENTS = "SELECT * FROM Patient";
     
     
     public static String APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
@@ -61,6 +62,7 @@ public class Queries {
     public static String INSERT_APPOINTMENT = "INSERT INTO Appointment (appointment_date, booked_service, booking_time, patient_id) VALUES (?, ?, ?, ?)";
     public static String SEARCH_APPOINTMENT_BYDATE_TIME = "SELECT * FROM Appointment WHERE booked_service = ? AND appointment_date = ? AND booking_time = ?";
     public static String DELETE_APPOINTMENT_BY_ID = "DELETE FROM Appointment Where appointment_id = ?";
+    public static String SELECT_ALL_APPOINTMENTS = "SELECT * FROM Appointment";
     
     public static String INVOICE_TABLE = "CREATE TABLE Invoice (\n" +
                                         "    invoice_id INT AUTO_INCREMENT PRIMARY KEY,\n" +
@@ -74,5 +76,6 @@ public class Queries {
                                         ");";
     public static String INVOICE_TABLE_AUTO_INCREMENT = "ALTER TABLE Invoice AUTO_INCREMENT = 100001;";
     public static String INSERT_INVOICE = "INSERT INTO Invoice (amount_due, invoice_date, services_provided, appointment_id, patient_id) VALUES (?, ?, ?, ?, ?)";
-    public static String SELECT_ALL_INVOICE = "SELECT * FROM Invoice WHERE patient_id = ?";
+    public static String SELECT_ALL_INVOICE_BY_ID = "SELECT * FROM Invoice WHERE patient_id = ?";
+    public static String SELECT_ALL_INVOICE = "SELECT * FROM Invoice";
 }

@@ -53,6 +53,7 @@ public class MedicalStaffHomeController implements Initializable {
 
     @FXML
     private void viewAnalyticsDashboardEvent(ActionEvent event) {
+        App.switchScene("viewAnalytics.fxml");
     }
 
 }

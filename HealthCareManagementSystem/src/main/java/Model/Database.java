@@ -2,6 +2,7 @@
 package Model;
 import com.mycompany.healthcaremanagementsystem.App;
 import com.mycompany.healthcaremanagementsystem.UpdatePatientController;
+import com.mycompany.healthcaremanagementsystem.ViewAnalyticsController;
 import com.mycompany.healthcaremanagementsystem.ViewBillController;
 import com.mycompany.healthcaremanagementsystem.modifyUserController;
 import java.sql.Connection;
@@ -447,13 +448,13 @@ public class Database {
         upc.getMedicalHistoryField().setText(p.getMedicalHistory());
     }
     
-    public List<Invoice> getAllInvoices(Patient p)
+    public List<Invoice> getAllInvoicesByID(Patient p)
     {
         List<Invoice> list = new ArrayList<>();
         try {
             
             Connection c = getConnection();
-            PreparedStatement ps = c.prepareStatement(Queries.SELECT_ALL_INVOICE);
+            PreparedStatement ps = c.prepareStatement(Queries.SELECT_ALL_INVOICE_BY_ID);
             
             
             ps.setLong(1,p.getPatientId());
@@ -471,16 +472,72 @@ public class Database {
             
             
         } catch (Exception e) {
-            System.out.println("Exception in add new Invoice");
+            System.out.println("Exception in getInvoiceByID");
             e.printStackTrace();
         }
         return list;
     }
     
+        public List<Invoice> getAllInvoices()
+    {
+        List<Invoice> list = new ArrayList<>();
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SELECT_ALL_INVOICE);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                Invoice i = new Invoice(rs.getLong(1), rs.getDate(3), rs.getString(4), rs.getLong(5), rs.getLong(6));
+                list.add(i);
+            }
+            
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Exception in getAllInvoice");
+            e.printStackTrace();
+        }
+        return list;
+    }
+        
+    public List<Patient> getAllPatients()
+    {
+        List<Patient> list = new ArrayList<>();
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SELECT_ALL_PATIENTS);
+            
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+              Patient  p = new Patient(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+
+                list.add(p);
+            }
+            
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Exception in getAllPatients");
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    
+        
+        
     public void setBillView(ViewBillController vbc, Patient p)
     {
         vbc.getPatientNameLabel().setText(p.getFirstname()+" "+p.getLastname());
-        List<Invoice> li = getAllInvoices(p);
+        List<Invoice> li = getAllInvoicesByID(p);
         vbc.getBillArea().appendText("\n");
         String billView = "";
         double grandTotal = 0.0;
@@ -502,6 +559,119 @@ public class Database {
         vbc.getBillArea().appendText("------------------------------------------------------\n"+""
                 + "Grand Total: $ "+grandTotal);
 
+        
+    }
+    
+    public void setAnalyticsView(ViewAnalyticsController vac)
+    {
+        // All Patients
+        List<Patient> patientList = getAllPatients();
+        List<Invoice> invoiceList = getAllInvoices();
+        
+        int totalPatient = patientList.size();
+        int totalAppointments = invoiceList.size();
+        double totalRevenue = 0;
+        double totalGST = 0;
+        double averageIncome = 0;
+        double grossTotal = 0;
+        
+        int regularCheckupNo = 0;
+        int intensiveCareNo = 0;
+        int surgeryNo = 0;
+        int doctorConsultationNo = 0;
+        
+        double regularCheckup = 0;
+        double intensiveCare = 0;
+        double surgery = 0;
+        double doctorConsultation = 0;
+        
+        
+        for(Invoice i:invoiceList)
+        {
+            totalRevenue += i.getAmountDue();
+            totalGST += Double.parseDouble(i.getGST());
+            grossTotal += Double.parseDouble(i.getTotal());
+            if(i.getServiceProvided().equalsIgnoreCase("Regular Checkup"))
+            {
+                regularCheckupNo++;
+                regularCheckup += i.getAmountDue();
+            }
+            else if(i.getServiceProvided().equalsIgnoreCase("Intensive Care"))
+            {
+                intensiveCareNo++;
+                intensiveCare += i.getAmountDue();
+            }
+            else if(i.getServiceProvided().equalsIgnoreCase("Surgery "))
+            {
+                surgeryNo++;
+                surgery += i.getAmountDue();
+            }
+            else if(i.getServiceProvided().equalsIgnoreCase("Doctor Consultation"))
+            {
+                doctorConsultationNo++;
+                doctorConsultation += i.getAmountDue();
+            }
+        }
+        
+        averageIncome = totalRevenue/totalPatient;
+        
+        LocalDate now = LocalDate.now();
+        vac.getAnalyticsArea().appendText("							HealthLink Hospital				Today Date: "+now.toString()+"\n" +
+"----------------------------------------------------------------------------------------------------------------------\n" +
+"\n" +
+"							\n" +
+"\n" +
+"-----------------------------------------------\n" +
+"\n" +
+"               Overall Revenue\n" +
+"\n" +
+"-----------------------------------------------\n" +
+"\n" +
+"Total Patients : "+totalPatient+"\n" +
+"\n" +
+"Total Appointements : "+totalAppointments+"\n" +
+"\n" +
+"Total Revenue Generated : $ "+totalRevenue+" (exl GST)\n" +
+"\n" +
+"Average Income Per Patient : $ "+averageIncome+ " (exl GST)\n" +
+"\n" +
+"Total GST Colleted : $ "+totalGST+"\n" +
+"\n" +
+"Gross  Total : $ "+grossTotal+" (including GST)\n" +
+"\n" +
+"------------------------------------------------\n" +
+"\n" +
+"           HealthCare Services Trends\n" +
+"\n" +
+"------------------------------------------------\n" +
+"\n" +
+"Regular Checkups : "+regularCheckupNo+"\n" +
+"\n" +
+"Intensive Care : "+intensiveCareNo+"\n" +
+"\n" +
+"Surgery : "+surgeryNo+"\n" +
+"\n" +
+"Doctor Consultation : "+doctorConsultationNo+"\n" +
+"\n" +
+"------------------------------------------------\n" +
+"\n" +
+"          Income Generated By Services\n" +
+"\n" +
+"------------------------------------------------\n" +
+"\n" +
+"Regular Checkups : $ "+regularCheckup+" (exl GST)\n" +
+"\n" +
+"Intensive Care : $ "+intensiveCare+" (exl GST)\n" +
+"\n" +
+"Surgery : $ "+surgery+" (exl GST)\n" +
+"\n" +
+"Doctor Consultation : $ "+doctorConsultation+" (exl GST)\n" +
+"\n" +
+"Total Income : $ "+grossTotal+" (including GST)\n" +
+"\n" +
+"----------------------------------------------------------------------------------------------------------------------\n" +
+"\n" +
+"                                   Thank You For Using Health Care Management System");
         
     }
  
