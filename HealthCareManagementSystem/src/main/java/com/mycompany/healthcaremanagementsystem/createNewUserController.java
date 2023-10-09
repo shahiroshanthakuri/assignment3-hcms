@@ -104,9 +104,9 @@ public class createNewUserController implements Initializable {
             dateOfBirth = java.sql.Date.valueOf(dateOfBirthField.getValue());
             User user = App.getDb().insertAdmin(new User(-1, firstName, lastName, gender, dateOfBirth, email, password, role));
             
-            
             // show the success message
-                        // Display a success alert
+            
+            // Display a success alert
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Health Care Management System");
             alert.setHeaderText("Success");
@@ -117,6 +117,8 @@ public class createNewUserController implements Initializable {
 
                 }
             });
+            
+            clearFields();
         }
     }
 
@@ -139,6 +141,28 @@ public class createNewUserController implements Initializable {
     {
         error.setText(msg);
         error.setVisible(e);
+    }
+
+    @FXML
+    private void homeBtn(ActionEvent event) {
+        App.switchScene("adminHome.fxml");
+    }
+
+    @FXML
+    private void logoutBtn(ActionEvent event) {
+        App.switchScene("loginPage.fxml");
+    }
+    
+    public void clearFields()
+    {
+        firstnameField.setText("");
+        lastnameField.setText("");
+        genderMenu.setText("Select Gender");
+        dateOfBirthField.setValue(null);
+        emailField.setText("");
+        passwordField.setText("");
+        confirmPassField.setText("");
+        roleMenu.setText("Select Role");
     }
 
 }

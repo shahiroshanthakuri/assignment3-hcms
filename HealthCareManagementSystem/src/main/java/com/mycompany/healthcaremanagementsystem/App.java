@@ -15,25 +15,44 @@ import java.io.IOException;
  */
 public class App extends Application {
 
-    private static Scene scene;
+    private static Stage primaryStage; // Main application stage
+    private static Scene currentScene; // Current scene displayed
     private static Database db;
-    private User currentUser;
+    private static User currentUser;
+    private static User searchedUser;
+    public static boolean isDatabaseExist = false;
 
     @Override
     public void start(Stage stage) throws IOException {
-        this.db = new Database("root", "15896");
-        scene = new Scene(loadFXML("loginPage"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+        primaryStage = stage;
+        primaryStage.setTitle("HealthCare Management System");
+        switchScene("loginPage.fxml");
+        primaryStage.show();
     }
+    // Method to switch between different scenes in the application
+    public static void switchScene(String fxmlFileName) {
+        try {
+            FXMLLoader loader = new FXMLLoader(App.class.getResource(fxmlFileName));
+            Parent root = loader.load();
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
+            // Database setup (if not already created)
+            if (!isDatabaseExist) {
+                db = new Database("root", "15896");
+                isDatabaseExist = true;
+            }
 
-    private static Parent loadFXML(String fxml) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-        return fxmlLoader.load();
+            if(fxmlFileName.equalsIgnoreCase("modifyUser.fxml"))
+            {
+                modifyUserController muc = (modifyUserController) loader.getController();
+                getDb().modifyUserSetFields(muc, getSearchedUser());
+            }
+            
+            // Set the current scene to the new scene
+            currentScene = new Scene(root);
+            primaryStage.setScene(currentScene);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
@@ -44,13 +63,23 @@ public class App extends Application {
         return db;
     }
 
-    public User getCurrentUser() {
+    public static User getCurrentUser() {
         return currentUser;
     }
 
-    public void setCurrentUser(User currentUser) {
-        this.currentUser = currentUser;
+    public static void setCurrentUser(User currentUser) {
+        App.currentUser = currentUser;
     }
+
+    public static User getSearchedUser() {
+        return searchedUser;
+    }
+
+    public static void setSearchedUser(User searchedUser) {
+        App.searchedUser = searchedUser;
+    }
+    
+    
     
     
     

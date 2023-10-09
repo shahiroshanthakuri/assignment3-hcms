@@ -1,6 +1,7 @@
 
 package Model;
 import com.mycompany.healthcaremanagementsystem.App;
+import com.mycompany.healthcaremanagementsystem.modifyUserController;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,7 +15,6 @@ public class Database {
     private String username;
     private String password;
     private Connection c;
-    private App app;
     
     // create the database healthlink
     public Database(String username, String password)
@@ -37,12 +37,11 @@ public class Database {
          catch (Exception e) {
             e.printStackTrace();
         }
-       app = new App();
        createAllTables();
        setAutoIncrement();
        LocalDate date = LocalDate.now();
             
-       User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "admin", "admin");
+       User admin = new User(-1,"admin", "admin", "male", java.sql.Date.valueOf(date), "admin@mail.com", "a", "Admin");
        insertAdmin(admin);
     }
     
@@ -66,13 +65,11 @@ public class Database {
             Statement s = c.createStatement();
             String userT = Queries.USER_TABLE;
             String patientT = Queries.PATIENT_TABLE;
-            String medicalStaffT = Queries.MEDICAL_STAFF_TABLE;
             String appointmentT = Queries.APPOINTMENT_TABLE;
-            String billingT = Queries.BILLING_TABLE;
+            String billingT = Queries.INVOICE_TABLE;
             
             s.addBatch(userT);
             s.addBatch(patientT);
-            s.addBatch(medicalStaffT);
             s.addBatch(appointmentT);
             s.addBatch(billingT);
             
@@ -92,8 +89,7 @@ public class Database {
             Statement s = c.createStatement();
             s.addBatch(Queries.USER_TABLE_AUTO_INCREMENT);
             s.addBatch(Queries.PATIENT_TABLE_AUTO_INCREMENT);
-            s.addBatch(Queries.MEDICAL_STAFF_TABLE_AUTO_INCREMENT);
-            s.addBatch(Queries.BILLING_TABLE_AUTO_INCREMENT);
+            s.addBatch(Queries.INVOICE_TABLE_AUTO_INCREMENT);
             s.addBatch(Queries.APPOINTMENT_TABLE_AUTO_INCREMENT);
             
             // execute all queries
@@ -132,13 +128,43 @@ public class Database {
                 }
             }
             // setting the current user
-            app.setCurrentUser(admin);
+            App.setCurrentUser(admin);
             ps.close();
             
                      
             
         } catch (Exception e) {
             System.out.println("Exception in admin");
+            e.printStackTrace();
+        }
+        return admin;
+    }
+    
+    
+    public User updateUserByID(User admin)
+    {
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.UPDATE_USER_BY_ID);
+            
+            
+            ps.setString(1,admin.getFirstName());
+            ps.setString(2,admin.getLastName());
+            ps.setString(3,admin.getGender());
+            ps.setDate(4,admin.getDateOfBirth());
+            ps.setString(5,admin.getEmail());
+            ps.setString(6,admin.getPassword());
+            ps.setString(7,admin.getRole());
+            ps.setLong(8, admin.getId());
+            
+            ps.executeUpdate();
+            ps.close();
+            
+                     
+            
+        } catch (Exception e) {
+            System.out.println("Exception in update user");
             e.printStackTrace();
         }
         return admin;
@@ -168,6 +194,36 @@ public class Database {
         }
             
         return u;
+    }
+    
+    public void deleteUserById(long id)
+    {
+        
+        try {
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.DELETE_USER_BY_ID);
+            ps.setLong(1, id);
+            
+            ps.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println("Exception in Deleting user by id");
+            e.printStackTrace();
+        }
+            
+    }
+    
+    
+    public void modifyUserSetFields(modifyUserController muc, User u)
+    {
+        muc.getFirstnameField().setText(u.getFirstName());
+        muc.getLastnameField().setText(u.getLastName());
+        muc.getGenderField().setText(u.getGender());
+        muc.getDateOfBirthField().setText(u.getDateOfBirth().toString());
+        muc.getEmailField().setText(u.getEmail());
+        muc.getPasswordField().setText(u.getPassword());
+        muc.getConfirmPassField().setText(u.getPassword());
+        muc.getRoleField().setText(u.getRole());
     }
  
    

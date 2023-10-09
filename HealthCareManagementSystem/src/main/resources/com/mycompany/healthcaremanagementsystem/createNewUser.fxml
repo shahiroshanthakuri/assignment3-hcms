@@ -23,7 +23,6 @@
         <items>
           <MenuItem mnemonicParsing="false" onAction="#roleMenuEvent" text="Admin" />
           <MenuItem mnemonicParsing="false" onAction="#roleMenuEvent" text="Medical Staff" />
-            <MenuItem mnemonicParsing="false" onAction="#roleMenuEvent" text="Patient" />
         </items>
       </MenuButton>
       <MenuButton fx:id="genderMenu" layoutX="246.0" layoutY="138.0" mnemonicParsing="false" onAction="#genderMenuEvent" prefHeight="26.0" prefWidth="150.0" text="Select Gender">
@@ -42,5 +41,7 @@
       <Label layoutX="118.0" layoutY="309.0" text="Confirm Password:" />
       <TextField fx:id="confirmPassField" layoutX="246.0" layoutY="305.0" />
       <Text fx:id="error" fill="RED" layoutX="247.0" layoutY="444.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="328.5367431640625" />
+      <Button layoutX="405.0" layoutY="479.0" mnemonicParsing="false" onAction="#homeBtn" text="Home" />
+      <Button layoutX="473.0" layoutY="479.0" mnemonicParsing="false" onAction="#logoutBtn" text="Log Out" />
    </children>
 </AnchorPane>

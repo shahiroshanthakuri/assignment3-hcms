@@ -4,6 +4,7 @@ package com.mycompany.healthcaremanagementsystem;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +30,19 @@ public class adminHomeController implements Initializable {
     
     @FXML
     private void createNewUserEvent(ActionEvent event) throws IOException {
-        App.setRoot("createNewUser");
+        App.switchScene("createNewUser.fxml");
+    }
+
+    @FXML
+    private void modifyUserEvent(ActionEvent event) throws IOException {
+        App.switchScene("searchUser.fxml");
+    }
+
+    @FXML
+    private void logoutEvent(ActionEvent event) {
+     
+            App.switchScene("loginPage.fxml");
+        
     }
 
 }

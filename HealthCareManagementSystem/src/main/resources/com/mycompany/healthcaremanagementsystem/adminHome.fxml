@@ -9,10 +9,8 @@
    <children>
       <Text fx:id="error" fill="RED" layoutX="217.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false" wrappingWidth="363.19992675781236" />
       <Label layoutX="265.0" layoutY="21.0" text="Admin Home" />
-      <Button layoutX="247.0" layoutY="63.0" mnemonicParsing="false" onAction="#createNewUserEvent" text="Create New User" />
-      <Button layoutX="247.0" layoutY="103.0" mnemonicParsing="false" text="Modify New User" />
-      <Button layoutX="247.0" layoutY="138.0" mnemonicParsing="false" text="View Patients Records" />
-      <Button layoutX="247.0" layoutY="174.0" mnemonicParsing="false" text="View Medical Staff" />
-      <Button layoutX="247.0" layoutY="212.0" mnemonicParsing="false" text="View Users" />
+      <Button layoutX="245.0" layoutY="122.0" mnemonicParsing="false" onAction="#createNewUserEvent" text="Create New User" />
+      <Button layoutX="243.0" layoutY="174.0" mnemonicParsing="false" onAction="#modifyUserEvent" text="Modify New User" />
+      <Button layoutX="472.0" layoutY="359.0" mnemonicParsing="false" onAction="#logoutEvent" prefHeight="26.0" prefWidth="108.0" text="Log Out" />
    </children>
 </AnchorPane>

@@ -50,17 +50,43 @@ public class loginController implements Initializable {
             showError(true, "Password is required!");
         }
         else{
-            showError(false, "");
-            long uID = Long.parseLong(userID);
-            User u = App.getDb().selectUserByID(uID);
-            if(u.getRole().equalsIgnoreCase("admin"))
-            {
-                try {
-                    App.setRoot("adminHome");
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
+            boolean valid = false;
+            long uID = -1;
+            try {
+                uID = Long.parseLong(userID);
+                valid = true;
+            } catch (Exception e) {
+                showError(true, "Please Enter a Valid User ID");
             }
+            if(valid)
+            {
+                User u = App.getDb().selectUserByID(uID);
+                if(u == null)
+                {
+                    showError(true, "User with the given id does not exist");
+                }
+                else{
+                    if(u.getPassword().compareTo(password) == 0)
+                    {
+                        showError(false, "");
+                        if(u.getRole().equalsIgnoreCase("admin"))
+                        {
+                           
+                                App.switchScene("adminHome.fxml");
+                        
+                        }
+
+                    }
+                    else{
+                        showError(true, "Password is Incorrect");
+                    }
+
+                }
+                
+            }
+            
+
+   
         }
         
     }
