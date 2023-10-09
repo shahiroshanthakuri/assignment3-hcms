@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
+
 package com.mycompany.healthcaremanagementsystem;
 
 import java.net.URL;
@@ -42,6 +39,7 @@ public class MedicalStaffHomeController implements Initializable {
 
     @FXML
     private void scheduleAppointmentEvent(ActionEvent event) {
+        App.switchScene("bookAppointment.fxml");
     }
 
     @FXML

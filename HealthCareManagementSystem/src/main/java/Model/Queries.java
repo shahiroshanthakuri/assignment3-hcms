@@ -52,12 +52,15 @@ public class Queries {
     public static String APPOINTMENT_TABLE = "CREATE TABLE Appointment (\n" +
                                                 "    appointment_id INT AUTO_INCREMENT PRIMARY KEY,\n" +
                                                 "    appointment_date DATE NOT NULL,\n" +
-                                                "    booked_service VARCHAR(100) NOT NULL,\n" +
+                                                "    booked_service VARCHAR(100) NOT NULL,\n"
+                                              + "    booking_time VARCHAR(20)," +
                                                 "    patient_id INT,\n" +
                                                 "    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)\n" +
                                                 ");";
     public static String APPOINTMENT_TABLE_AUTO_INCREMENT = "ALTER TABLE Appointment AUTO_INCREMENT = 10001;";
-
+    public static String INSERT_APPOINTMENT = "INSERT INTO Appointment (appointment_date, booked_service, booking_time, patient_id) VALUES (?, ?, ?, ?)";
+    public static String SEARCH_APPOINTMENT_BYDATE_TIME = "SELECT * FROM Appointment WHERE booked_service = ? AND appointment_date = ? AND booking_time = ?";
+    public static String DELETE_APPOINTMENT_BY_ID = "DELETE FROM Appointment Where appointment_id = ?";
     
     public static String INVOICE_TABLE = "CREATE TABLE Invoice (\n" +
                                         "    invoice_id INT AUTO_INCREMENT PRIMARY KEY,\n" +
@@ -69,6 +72,7 @@ public class Queries {
                                         "    FOREIGN KEY (appointment_id) REFERENCES Appointment(appointment_id),\n" +
                                         "    FOREIGN KEY (patient_id) REFERENCES Patient(patient_id)\n" +
                                         ");";
-    public static String INVOICE_TABLE_AUTO_INCREMENT = "ALTER TABLE Invoice AUTO_INCREMENT = 5000001;";
+    public static String INVOICE_TABLE_AUTO_INCREMENT = "ALTER TABLE Invoice AUTO_INCREMENT = 100001;";
+    public static String INSERT_INVOICE = "INSERT INTO Invoice (amount_due, invoice_date, services_provided, appointment_id, patient_id) VALUES (?, ?, ?, ?, ?)";
 
 }

@@ -39,7 +39,7 @@ public class SearchUserController implements Initializable {
     @FXML
     private void logoutEvent(ActionEvent event) {
         
-            App.switchScene("loginPage.fxml");
+        App.switchScene("loginPage.fxml");
  
     }
 

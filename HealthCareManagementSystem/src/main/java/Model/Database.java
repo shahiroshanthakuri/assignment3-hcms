@@ -316,6 +316,108 @@ public class Database {
         }
         return p;
     }
+   
+   public Appointment addAppointment(Appointment a)
+    {
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.INSERT_APPOINTMENT);
+            
+            
+            ps.setDate(1,a.getAppointmentDate());
+            ps.setString(2,a.getBookingService());
+            ps.setString(3,a.getBookingTime());
+            ps.setLong(4,a.getPatientID());
+
+
+            int ra = ps.executeUpdate();
+            Statement s = c.createStatement();
+
+            if (ra > 0) {
+                ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+                if (rs.next()) {
+                    long id = rs.getInt(1);
+                    a.setAppointmentID(id);
+                }
+            }
+            
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Exception in add new Appointment");
+            e.printStackTrace();
+        }
+        return a;
+        
+    }
+   
+   
+    public boolean searchForExistingAppointment(Appointment a)
+    {
+        boolean ans = false;
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SEARCH_APPOINTMENT_BYDATE_TIME);
+            
+            
+            ps.setString(1,a.getBookingService());
+            ps.setDate(2,a.getAppointmentDate());
+            ps.setString(3,a.getBookingTime());
+
+
+            ResultSet rs = ps.executeQuery();
+           
+
+            ans =  rs.next();
+           ps.close();
+  
+        } catch (Exception e) {
+            System.out.println("Exception in search existing Appointment");
+            e.printStackTrace();
+        }
+        return ans;
+        
+    }
+    
+    public Invoice addInvoice(Invoice i)
+    {
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.INSERT_INVOICE);
+            
+            
+            ps.setDouble(1,i.getAmountDue());
+            ps.setDate(2,i.getInvoiceDate());
+            ps.setString(3,i.getServiceProvided());
+            ps.setLong(4,i.getAppointmentID());
+            ps.setLong(5,i.getPatientID());
+
+
+            int ra = ps.executeUpdate();
+            Statement s = c.createStatement();
+
+            if (ra > 0) {
+                ResultSet rs = s.executeQuery("SELECT LAST_INSERT_ID()");
+                if (rs.next()) {
+                    long id = rs.getInt(1);
+                    i.setInvoiceID(id);
+                }
+            }
+            
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Exception in add new Invoice");
+            e.printStackTrace();
+        }
+        return i;
+        
+    }
     
     
     public void modifyUserSetFields(modifyUserController muc, User u)
