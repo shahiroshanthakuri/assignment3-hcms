@@ -74,5 +74,5 @@ public class Queries {
                                         ");";
     public static String INVOICE_TABLE_AUTO_INCREMENT = "ALTER TABLE Invoice AUTO_INCREMENT = 100001;";
     public static String INSERT_INVOICE = "INSERT INTO Invoice (amount_due, invoice_date, services_provided, appointment_id, patient_id) VALUES (?, ?, ?, ?, ?)";
-
+    public static String SELECT_ALL_INVOICE = "SELECT * FROM Invoice WHERE patient_id = ?";
 }

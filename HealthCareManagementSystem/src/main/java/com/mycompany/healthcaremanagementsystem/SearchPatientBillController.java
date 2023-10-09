@@ -1,8 +1,10 @@
 
 package com.mycompany.healthcaremanagementsystem;
 
+import Model.Invoice;
 import Model.Patient;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -75,6 +77,17 @@ public class SearchPatientBillController implements Initializable {
 
     @FXML
     private void viewBillEvent(ActionEvent event) {
+        
+        List<Invoice> li = App.getDb().getAllInvoices(App.getSearchedPatient());
+        if(li.size() == 0)
+        {
+            showError(true, "The Selected Patient has no bills to show");
+        }
+        else{
+            
+        App.switchScene("viewBill.fxml");
+        }
+        
     }
 
     @FXML

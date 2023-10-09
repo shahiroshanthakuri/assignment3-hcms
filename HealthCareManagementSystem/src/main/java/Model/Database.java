@@ -2,6 +2,7 @@
 package Model;
 import com.mycompany.healthcaremanagementsystem.App;
 import com.mycompany.healthcaremanagementsystem.UpdatePatientController;
+import com.mycompany.healthcaremanagementsystem.ViewBillController;
 import com.mycompany.healthcaremanagementsystem.modifyUserController;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Database {
     
@@ -442,6 +445,64 @@ public class Database {
         upc.getContactNumberField().setText(p.getContactNum());
         upc.getMedicareCardField().setText(p.getMedicareNumber());
         upc.getMedicalHistoryField().setText(p.getMedicalHistory());
+    }
+    
+    public List<Invoice> getAllInvoices(Patient p)
+    {
+        List<Invoice> list = new ArrayList<>();
+        try {
+            
+            Connection c = getConnection();
+            PreparedStatement ps = c.prepareStatement(Queries.SELECT_ALL_INVOICE);
+            
+            
+            ps.setLong(1,p.getPatientId());
+
+
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                Invoice i = new Invoice(rs.getLong(1), rs.getDate(3), rs.getString(4), rs.getLong(5), rs.getLong(6));
+                list.add(i);
+            }
+            
+            ps.close();
+            
+            
+        } catch (Exception e) {
+            System.out.println("Exception in add new Invoice");
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+    public void setBillView(ViewBillController vbc, Patient p)
+    {
+        vbc.getPatientNameLabel().setText(p.getFirstname()+" "+p.getLastname());
+        List<Invoice> li = getAllInvoices(p);
+        vbc.getBillArea().appendText("\n");
+        String billView = "";
+        double grandTotal = 0.0;
+        for(Invoice i:li)
+        {
+            billView += "Invoice ID: "+i.getInvoiceID()+"\n" +
+                        "------------------------------------------------------\n" +
+                        "Appointment Date: "+i.getInvoiceDate()+"\n" +
+                        "Appointment ID: "+i.getAppointmentID()+"\n" +
+                        "Service Selected: "+i.getServiceProvided()+"\n" +
+                        "Charges: $ "+i.getAmountDue()+"\n" +
+                        "GST: $ "+i.getGST()+"\n" +
+                        "------------------------------------------------------\n" +
+                        "Total: $ "+i.getTotal()+"\n\n";
+            grandTotal += Double.parseDouble(i.getTotal());
+        }
+        vbc.getBillArea().appendText(billView);
+        vbc.getBillArea().appendText("\n");
+        vbc.getBillArea().appendText("------------------------------------------------------\n"+""
+                + "Grand Total: $ "+grandTotal);
+
+        
     }
  
    

@@ -12,7 +12,6 @@
       <Button layoutX="472.0" layoutY="359.0" mnemonicParsing="false" onAction="#logoutEvent" prefHeight="26.0" prefWidth="108.0" text="Log Out" />
       <Button layoutX="248.0" layoutY="192.0" mnemonicParsing="false" onAction="#scheduleAppointmentEvent" text="Schedule Appointment" />
       <Button layoutX="248.0" layoutY="233.0" mnemonicParsing="false" onAction="#viewBillsEvent" text="View Bills" />
-      <Button layoutX="248.0" layoutY="265.0" mnemonicParsing="false" onAction="#searchPatientEvent" text="All Patient Records" />
-      <Button layoutX="248.0" layoutY="303.0" mnemonicParsing="false" onAction="#viewAnalyticsDashboardEvent" text="View Analytics Dashboard" />
+      <Button layoutX="246.0" layoutY="281.0" mnemonicParsing="false" onAction="#viewAnalyticsDashboardEvent" text="View Analytics Dashboard" />
    </children>
 </AnchorPane>
